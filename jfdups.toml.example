@@ -1,0 +1,56 @@
+# jfdups.toml — Configuration for jfdups Duplicate Detector
+# Copy this file to jfdups.toml and edit to match your setup.
+
+[jellyfin]
+# URL of your Jellyfin server
+url     = "http://localhost:8096"
+# API key: Jellyfin Dashboard → Advanced → API Keys → + (New Key)
+# Alternatively, set the JFDUPS_API_KEY environment variable (takes precedence).
+api_key = ""
+# HTTP request timeout in seconds
+timeout = 10
+
+[media]
+# Directories to scan for media files.
+# Use absolute paths. All platforms use forward slashes.
+#   macOS/Linux: "/path/to/media/Movies"
+#   Windows:     "C:/Users/you/Media/Movies"
+paths = [
+    "/path/to/media/Movies",
+    "/path/to/media/TV",
+]
+# File extensions to consider as media files
+extensions = ["mkv", "mp4", "avi", "m4v", "mov"]
+
+[detection]
+# Minimum similarity ratio (0.0–1.0) for fuzzy filename matching
+fuzzy_threshold  = 0.85
+# Use Jellyfin API to match by TMDB/TVDB provider IDs (more accurate)
+use_jellyfin_api = true
+
+[trash]
+# Where to move duplicate files (NOT deleted — fully recoverable).
+# Any writable directory works. Platform-specific options below.
+#
+# Plain folder (all platforms):
+dir = "/path/to/media/trash"
+#
+# macOS — integrate with Finder Trash so files appear in the Trash bin:
+#   Each volume has its own .Trashes/<UID> folder.
+#   Find your UID with: id -u
+#   dir = "/Volumes/YourDrive/.Trashes/501"
+#
+# Linux — FreeDesktop Trash spec (e.g. Nautilus/Dolphin integration):
+#   dir = "/path/to/drive/.Trash-1000"   # replace 1000 with your UID
+#
+# Windows — plain folder recommended; Recycle Bin integration is not supported:
+#   dir = "D:/MediaTrash"
+#
+# Note: preserve_structure mirrors the full source path inside the trash dir,
+# making it easy to identify and restore files by original location.
+preserve_structure = true
+
+[output]
+# Log file for session history (moves are recorded here for potential undo).
+# Use forward slashes on all platforms; ~ expands to your home directory.
+log_file = "~/.config/jfdups/jfdups.log"

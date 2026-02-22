@@ -1,0 +1,10 @@
+# User config (contains API key and personal paths)
+jfdups.toml
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+dist/
+build/
+.venv/

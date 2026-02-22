@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools>=61"]
+build-backend = "setuptools.backends.legacy:build"
+
+[project]
+name = "jfdups"
+version = "0.1.0"
+description = "Jellyfin Duplicate Detector & Cleanup Tool"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "rich>=13.0",
+    "tomli>=2.0",
+]
+
+[project.scripts]
+jfdups = "jfdups:main"
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["jfdups*"]
